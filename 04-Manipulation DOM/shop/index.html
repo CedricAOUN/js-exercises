@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="search">
+  <select id="categories"></select>
+  <button id="search-btn"></button>
+
+
+  <div id="results">
+
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
+
+<!--
+Une fois l'exercice finis, faire une archive et me l'envoyer en mp sur discord
+
+Faire une page web type catalogue produit
+récupérer des images pour les produits
+créer une tableau contenant un ensemble de produit (array ou object) avec les informations suivantes : titre, image, alt de l'image, prix, catégorie, mots clés (attributs du produit), note (utilisateur)[{
+          titre: 'titre produit 1',
+          image: 'image1.jpg',
+          alt: 'alt image1'
+          prix: 10,
+          categorie: 'tshirt',
+          attributs: ['attr1', 'attr2', ...],
+          note: 4
+      },{
+          titre: 'titre produit 2',
+          image: 'image2.jpg',
+          alt: 'alt image2'
+          prix: 14,
+          categorie: 'chemise',
+          attributs: ['attr1', 'attr2', ...],
+          note: 3.5
+      },...]
+Sur la page catalogue faire une barre latérale listant toutes les catégories sous forme de lien (selon les catégories présentent dans le tableau des produits via une boucle)
+  mettre également un input type text en dessous des catégories : pour la recherche
+  mettre également un input type text en dessous : pour filtrer par prix
+Puis un bloc principal listant tous les produits dans un bloc html en affichant les informations du produit
+  la catégorie et les attributs du produit doivent être des liens
+rajouter aussi dans les catégories un lien voir tous les produits
+
+Pour les évènement : 
+lors du click sur une catégorie de la barre latérale ou d'un bloc produit, il faut changer l'affichage des produits afin de n'afficher que ceux de cette catégorie.
+même chose pour les attributs affichés dans les blocs produits
+lors d'une saisie dans l'input de recherche, à partir de 3 caractères, filtrer les produits affichés afin que leur nom, leur catégorie ou leurs attributs contiennent cette chaine de caractère.
+lors d'une saisie dans l'input de recherche par prix, si la valeur est bien un chiffre, il faut afficher les produits dont le prix est inférieur à la saisie utilisateur.
+
+Pour aller plus loin :
+créer + de 9 produits dans le tableau
+Afficher 9 produits par défaut
+mettre des liens en bas de page pour la pagination, autant de lien qu'il y a de produits à afficher (9 par page)
+lors du click sur un lien de la pagination changer l'affichage des produits
+Lors des recherche ou des filtres par catégorie, recherche ou prix faire également une pagination si le nombre de produit dépasse 9
+-->
