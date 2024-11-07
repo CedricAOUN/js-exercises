@@ -89,8 +89,6 @@ function playSound(path, key) {
 function handleKeyDown(e) {
   if (e) e.preventDefault();
   
-  
-  if(sounds.includes(e.key))
   for (let s of sounds) {
     if (e.key == s.key) {
       playSound(s.path, s.key);
