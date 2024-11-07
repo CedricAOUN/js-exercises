@@ -1,0 +1,39 @@
+<!--
+// Mettre en place un tableau contenant un ensemble de couleur
+// Mettre en place un évènement click sur le document
+    // on récupère l'évènement
+        // on demande la position verticale et horizontal du click dans la page (event.pageX, event.pageY)
+// On prépare une taille comprise entre 50 et 150
+// On crée un div et on lui applique du css :
+    // largeur et hauteur = à la taille générée précédemment
+    // une position absolute
+    // un placement dans la page équivalente à la position du click
+    // une couleur aléatoire provenant du tableau
+    // on fait en sorte que le div soit un cercle
+    // une opacité à 1
+    // et une transition sur l'opacité avec un temps
+// On rajoute le div dans la page html
+// On récupère le dernier div créé dans la page via un sélecteur (il est possible d'en avoir plusieurs si on click rapidement)
+// On récupère la hauteur de la page (window.innerHeight)
+// On rajoute une transition sur le changement de la valeur top
+// On change la valeur top du div afin qu'il bouge jusqu'à atteindre le bas de la page depuis sa position (hauteur de la page - hauteur de notre div)
+// On ajoute un évènement sur le div pour capter la fin de la transition (event transitionend) 
+    // on passe l'opacité à 0
+    // et on supprime le div de la page elem.remove() avec un setTimeout
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+  <div id='canvas' style="width: 100%; height: 100%; position: relative;">
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
