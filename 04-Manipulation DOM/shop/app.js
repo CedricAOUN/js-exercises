@@ -4,7 +4,7 @@ const products = [
     image: "assets/images1.jpg",
     alt: "A classic graphic tee in black",
     price: 15,
-    category: "tshirt",
+    category: "shirt",
     attributes: ["100% cotton", "unisex fit", "soft touch"],
     rating: 4.5
   },
@@ -13,7 +13,7 @@ const products = [
     image: "assets/images2.jpg",
     alt: "Vintage hoodie with logo print",
     price: 35,
-    category: "hoodie",
+    category: "shirt",
     attributes: ["warm fleece", "oversized fit", "machine washable"],
     rating: 4.7
   },
@@ -22,7 +22,7 @@ const products = [
     image: "assets/images3.jpg",
     alt: "Lightweight sports tank top in grey",
     price: 20,
-    category: "tank top",
+    category: "shirt",
     attributes: ["breathable fabric", "sleeveless", "quick dry"],
     rating: 4.2
   },
@@ -40,7 +40,7 @@ const products = [
     image: "assets/images5.jpg",
     alt: "Dark blue slim fit jeans",
     price: 40,
-    category: "jeans",
+    category: "pants",
     attributes: ["stretch denim", "fitted cut", "durable material"],
     rating: 4.3
   },
@@ -49,7 +49,7 @@ const products = [
     image: "assets/images6.jpg",
     alt: "Classic casual polo in white",
     price: 25,
-    category: "polo",
+    category: "pants",
     attributes: ["soft cotton", "short sleeve", "breathable"],
     rating: 4.1
   },
@@ -67,7 +67,7 @@ const products = [
     image: "assets/images8.jpg",
     alt: "Lightweight running shorts in black",
     price: 18,
-    category: "shorts",
+    category: "pants",
     attributes: ["lightweight", "elastic waistband", "quick-dry"],
     rating: 4.5
   },
@@ -76,7 +76,7 @@ const products = [
     image: "assets/images9.jpg",
     alt: "Sweatshirt with bold graphic print",
     price: 28,
-    category: "sweatshirt",
+    category: "shirt",
     attributes: ["cotton blend", "round neck", "bold design"],
     rating: 4.6
   },
@@ -121,7 +121,7 @@ const products = [
     image: "assets/images14.jpg",
     alt: "Lightweight waterproof windbreaker in green",
     price: 45,
-    category: "jacket",
+    category: "shirt",
     attributes: ["water-resistant", "lightweight", "hooded"],
     rating: 4.8
   },
@@ -130,7 +130,7 @@ const products = [
     image: "assets/images15.jpg",
     alt: "Simple and soft white tee",
     price: 10,
-    category: "tshirt",
+    category: "shirt",
     attributes: ["100% cotton", "crew neck", "short sleeve"],
     rating: 4.1
   }
@@ -138,16 +138,28 @@ const products = [
 
 
 const searchInput = document.getElementById('search');
-const categorySelect = document.getElementById('category');
+const categorySelect = document.getElementById('categories');
 const searchBtn = document.getElementById('search-btn');
 const resultDiv = document.getElementById('results');
 
 let currentResults = [];
 
+categorySelect.addEventListener('change', (e) => {
+  currentResults = filterResults(e.target.value);
+  console.log(currentResults);
+  displayResults(currentResults);
+})
+
+
+
+
+
 for (let p of products) {
-  console.log(p);
-  currentResults.push(createCard(p.title, p.img, p.alt, p.price, p.category, p.attributes, p.rating));
+  currentResults.push(createCard(p.title, p.image, p.alt, p.price, p.category, p.attributes, p.rating));
 }
+
+console.log(currentResults)
+
 
 
 displayResults(currentResults);
@@ -156,8 +168,8 @@ displayResults(currentResults);
 
 function createCard(title, img, alt, price, category, attributes, rating) {
   let card = document.createElement('div');
+  card.className = 'card';
 
-  console.log(title);
 
   let h3Title = document.createElement('h3');
   h3Title.innerText = title;
@@ -175,11 +187,11 @@ function createCard(title, img, alt, price, category, attributes, rating) {
   
   let priceElement = document.createElement('p');
   priceElement.className = 'price';
-  priceElement.textContent = price;
+  priceElement.textContent = price + '💲';
 
   let ratingElement = document.createElement('p');
   ratingElement.className = 'rating';
-  ratingElement.textContent = rating;
+  ratingElement.textContent = rating + ' ⭐ ';
 
   priceAndRating.appendChild(priceElement);
   priceAndRating.appendChild(ratingElement);
@@ -204,16 +216,28 @@ function createAttributeList(attr) {
     }
   }
   
-  
   return ul;
 }
-
 
 function displayResults(res) {
   resultDiv.innerHTML = ""; // empty the div;
 
   for (let r of res) {
-    resultDiv.appendChild(r);
+    if(typeof r != undefined) resultDiv.appendChild(r);
   }
   
+}
+
+function filterResults(selectedCategory) {
+  let filteredList = [];
+  if (selectedCategory != 'all') {
+    for (let i of products) {
+      if (i.category == selectedCategory) filteredList.push(i);
+    }
+  } else {
+    for (let i of products) {
+      filteredList.push(i);
+    }
+  }
+  return filteredList;
 }
