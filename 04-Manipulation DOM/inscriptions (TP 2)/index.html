@@ -11,27 +11,35 @@
       text-align: center;
       padding: 30px;
     }
-
-    form, div {
+    form {
+      margin: 0 auto;
+      width: 1200px;
+      font-size: 20px;
+      border-radius: 10px;
+      padding: 10px;
       display: flex;
-      gap: 5px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(5,1fr);
+      grid-auto-flow: column;
+      gap: 10px;
       justify-content: center;
       padding: 30px;
       width: 1200px;
       margin: 0 auto;
-      font-size: 20px;
+      
     }
 
     .center {
       margin: 0 auto;
     }
 
-    div {
-      margin-top: 10px;
-      font-size: 32px;
-    }
-
-    input {
+    input, textarea {
       width: 500px;
       padding: 5px;
     }
@@ -39,36 +47,87 @@
     #result {
       padding-left: 10px;
     }
+
+    span {
+      color: red;
+      font-size: 16px;
+    }
+    textarea {
+      display: inline-block;
+    }
+
+    #submit {
+      margin: 0 auto;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
-  <h1 class="bg-primary text-white">Calculatrice</h1>
-  <div style="margin: 0 auto; width: 100%;">
-    <button id='show-btn' class="btn btn-primary">SHOW CALCULATOR</button>
-    <button id='hide-btn' class="btn btn-danger">HIDE CALCULATOR</button>
-  </div>
+  <h1 class="bg-primary text-white">Register</h1>
   
 
   <form class="bg-secondary" style="transition: opacity 1s">
-    
-    <input id='first-number' type="text">
-    <select id='operators'>
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="/">/</option>
-      <option value="*">*</option>
-      <option value="%">%</option>
-    </select>
-    <input id='second-number' type="text">
-    <button id="submit" type="button" class="btn btn-primary">Calculate</button>
+    <div class="container">
+      <div>
+        <label for="username">Username</label>
+        <input id="username" type="text">
+        <span id="username-error"></span>
+      </div>
 
+      <div>
+        <label for="first-name">First Name</label>
+        <input id="first-name" type="text">
+        <span id="first-name-error"></span>
+      </div>
+
+      <div>
+        <label for="last-name">Last Name</label>
+        <input id="last-name" type="text">
+        <span id="last-name-error"></span>
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password">
+        <span id="password-error"></span>
+      </div>
+
+      <div>
+        <label for="password-confirm">Confirm Password</label>
+        <input id="password-confirm" type="password">
+        <span id="password-confirm-error"></span>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="address">Address</label>
+        <textarea id="address"></textarea>
+        <span id="address-error"></span>
+      </div>
+
+      <div>
+        <label for="postal">Postal Code</label>
+        <input id="postal" type="text">
+        <span id="postal-error"></span>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="city">City</label>
+        <input id="city" type="text">
+        <span id="city-error"></span>
+      </div>
+
+      <div>
+        <label for="telephone">Telephone</label>
+        <input id="telephone" type="text">
+        <span id="telephone-error"></span>
+      </div>
+    </div>
+
+
+    <button id="submit" type="submit" class="btn btn-primary">Register</button>
   </form>
 
-  <div class="bg-info text-white">
-    <label for="result">Result:</label>
-    <p id="result">Please input some numbers to calculate</p>
-  </div>
   
   <script src="app.js"></script>
 </body>
