@@ -139,15 +139,19 @@ const products = [
 
 const searchInput = document.getElementById('search');
 const categorySelect = document.getElementById('categories');
+const clearBtn = document.getElementById('clear');
 const searchBtn = document.getElementById('search-btn');
+const priceInput = document.getElementById('price');
 const resultDiv = document.getElementById('results');
 
 let currentResults = [];
 
 createCategories();
+clearBtn.onclick = () => clearInput();
 
 categorySelect.addEventListener('change', applyFilters);
 searchInput.addEventListener('input', applyFilters);
+priceInput.addEventListener('input', applyFilters);
 
 
 
@@ -207,9 +211,16 @@ function createAttributeList(attr) {
 
   if (attr) {
       for (let a of attr) {
-      let listItem = document.createElement('li');
-      listItem.textContent = a;
-      ul.appendChild(listItem);
+        let listItem = document.createElement('li');
+        listItem.className = 'attributes';
+        listItem.textContent = a;
+
+        listItem.onclick = () => {
+          searchInput.value = a;
+          searchInput.dispatchEvent(new Event('input'));
+        };
+
+        ul.appendChild(listItem);
     }
   }
   
@@ -236,6 +247,12 @@ function createCategories() {
 }
 
 
+function clearInput() {
+  searchInput.value = '';
+  searchInput.dispatchEvent(new Event('input'));
+}
+
+
 // DISPLAY LOGIC
 
 function displayResults(resultList) {
@@ -249,6 +266,8 @@ function displayResults(resultList) {
 function applyFilters() {
   const searchQuery = searchInput.value.toLowerCase();
   const selectedCategory = categorySelect.value.toLowerCase();
+  const priceLimit = priceInput.value;
+  clearBtn.style.display = searchQuery ? 'block' : 'none';
 
   // Apply category and search filters
   currentResults = products.filter((product) => {
@@ -256,10 +275,11 @@ function applyFilters() {
     const matchesSearch = searchQuery === '' || (
       product.category.toLowerCase().includes(searchQuery) ||
       product.title.toLowerCase().includes(searchQuery) ||
-      product.alt.toLowerCase().includes(searchQuery) ||
       product.attributes.some(attr => attr.toLowerCase().includes(searchQuery))
     );
-    return matchesCategory && matchesSearch;
+    const isUnderPriceLimit = product.price <= priceLimit || priceLimit == '';
+
+    return matchesCategory && matchesSearch && isUnderPriceLimit;
   });
 
   displayResults(currentResults);

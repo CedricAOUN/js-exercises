@@ -6,6 +6,15 @@ h1 {
   text-align: center;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+span {
+  font-size: 32px;
+}
+
 .container {
   width: 100%;
   display: flex;
@@ -19,9 +28,24 @@ h1 {
   border: 1px solid black;
 }
 
+.attributes {
+  border: 1px solid blue;
+  padding: 2px;
+}
+
+.attributes:hover {
+  background-color: blue;
+  color: white;
+}
+
 .category:hover {
   background-color: black;
   color: white;
+}
+
+.price-and-rating {
+  display: flex;
+  justify-content: space-between;
 }
 
 #search {
