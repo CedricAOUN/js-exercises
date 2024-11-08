@@ -265,6 +265,8 @@ function applyFilters() {
   displayResults(currentResults);
 }
 
+
+// work in progress, pas encore implementer
 function splitToPages(elementList) {
   const pageSize = 9;
   let pages = [];
