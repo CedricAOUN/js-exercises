@@ -1,0 +1,63 @@
+<!--
+Créer une page listant des tâches à faire
+Créer quelques tâches dans un tableau array
+Une tâche doit comporter :
+    Un titre
+    Un statut (Validée / En validation / En cours / Urgent / En attente / A faire)
+    Une catégorie
+    Une description
+    Un destinataire
+
+Dans la page web faire :
+    Afficher les tâches existantes depuis le tableau
+    Faire un formulaire permettant de rajouter des tâches
+        le statut et la catégorie doivent être des listes déroulantes
+    Lors de la validation du form :
+        Aucun champs de doit être vide
+        On récupère les saisies et on ajoute la tâche dans la liste des tâches
+        Ensuite on vide les saisies utilisateur et on remet les select comme initialement
+
+Pour aller plus loin :
+    Mettre des filtres pour afficher uniquement les tâches correspondates. On cache ou on affiche selon le filtre.
+        Filtrer par chaine de caractère sur le titre ou la description
+        Filtrer par destinataire
+        Filtrer par statut (liste déroulante)
+        Filtrer par categorie (liste déroulante)
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .task {
+      border: 1px solid black;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  
+
+
+  <form>
+    <span>Title: </span><input type="text" id="title">
+    <span>Status: </span><input type="text" id="status">
+    <span>Category: </span><input type="text" id="category">
+    <span>Description: </span><input type="text" id="description">
+    <span>Assign to: </span><input type="text" id="assignTo">
+    <button type="submit"> submit </button>
+  </form>
+
+
+  <div id="content">
+
+  </div>
+
+  
+  <script src="app.js"></script>
+</body>
+</html>
