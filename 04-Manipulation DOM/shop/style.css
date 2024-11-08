@@ -13,6 +13,17 @@ h1 {
   gap: 5px;
 }
 
+.category {
+  display: block;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.category:hover {
+  background-color: black;
+  color: white;
+}
+
 #search {
   width: 1000px;
   padding: 10px;

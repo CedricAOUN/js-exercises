@@ -144,6 +144,8 @@ const resultDiv = document.getElementById('results');
 
 let currentResults = [];
 
+createCategories();
+
 categorySelect.addEventListener('change', applyFilters);
 searchInput.addEventListener('input', applyFilters);
 
@@ -156,6 +158,7 @@ displayResults(currentResults);
 
 
 
+// ELEMENT CREATION
 function createCard(title, img, alt, price, category, attributes, rating) {
   let card = document.createElement('div');
   card.className = 'card';
@@ -168,9 +171,13 @@ function createCard(title, img, alt, price, category, attributes, rating) {
   imageElement.src = img;
   imageElement.alt = alt;
 
-  let categorySubText = document.createElement('p');
+  let categorySubText = document.createElement('a');
   categorySubText.className = 'category';
   categorySubText.textContent = category;
+  categorySubText.onclick = () => {
+    categorySelect.value = category;
+    categorySelect.dispatchEvent(new Event('change'));
+  };
 
   let priceAndRating = document.createElement('div');
   priceAndRating.className = 'price-and-rating';
@@ -209,6 +216,28 @@ function createAttributeList(attr) {
   return ul;
 }
 
+function createCategories() {
+  let categories = [];
+
+  for (let p of products) {
+    if (!categories.includes(p.category)) {
+      categories.push(p.category);
+    }
+  }
+
+  for (let c of categories) {
+    let categoryElement = document.createElement('option');
+    categoryElement.textContent = c;
+    categoryElement.value = c;
+
+    categorySelect.appendChild(categoryElement);
+  }
+
+}
+
+
+// DISPLAY LOGIC
+
 function displayResults(resultList) {
   resultDiv.innerHTML = ""; // empty the div;
 
@@ -236,13 +265,24 @@ function applyFilters() {
   displayResults(currentResults);
 }
 
+function splitToPages(elementList) {
+  const pageSize = 9;
+  let pages = [];
+  let page = [];
 
-function handleSelectChange(e) {
-  currentResults = filterCategory(e.target.value);
-  displayResults(currentResults);
-}
+  for (let el of elementList) {
+    page.push(el);
 
-function handleSearchChange(e) {
-  currentResults = filterSearch(e.target.value);
-  displayResults(currentResults);
+    if (page.length === pageSize) {
+      pages.push(page);
+      page = [];
+    }
+  }
+
+  // add the remainders to a page.
+  if (page.length > 0) {
+      pages.push(page);
+  }
+
+  return pages;
 }
