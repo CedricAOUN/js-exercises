@@ -2,6 +2,21 @@ body {
   height: 100vh;
 }
 
+h1 {
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+#search {
+  width: 1000px;
+  padding: 10px;
+}
 
 #results {
   margin: 0 auto;

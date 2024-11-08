@@ -144,24 +144,14 @@ const resultDiv = document.getElementById('results');
 
 let currentResults = [];
 
-categorySelect.addEventListener('change', (e) => {
-  currentResults = filterResults(e.target.value);
-  console.log(currentResults);
-  displayResults(currentResults);
-})
+categorySelect.addEventListener('change', applyFilters);
+searchInput.addEventListener('input', applyFilters);
 
 
 
 
-
-for (let p of products) {
-  currentResults.push(createCard(p.title, p.image, p.alt, p.price, p.category, p.attributes, p.rating));
-}
-
-console.log(currentResults)
-
-
-
+// init with unfiltered products;
+currentResults = products;
 displayResults(currentResults);
 
 
@@ -219,25 +209,40 @@ function createAttributeList(attr) {
   return ul;
 }
 
-function displayResults(res) {
+function displayResults(resultList) {
   resultDiv.innerHTML = ""; // empty the div;
 
-  for (let r of res) {
-    if(typeof r != undefined) resultDiv.appendChild(r);
+  for (let r of resultList) {
+    resultDiv.appendChild(createCard(r.title, r.image, r.alt, r.price, r.category, r.attributes, r.rating));
   }
-  
 }
 
-function filterResults(selectedCategory) {
-  let filteredList = [];
-  if (selectedCategory != 'all') {
-    for (let i of products) {
-      if (i.category == selectedCategory) filteredList.push(i);
-    }
-  } else {
-    for (let i of products) {
-      filteredList.push(i);
-    }
-  }
-  return filteredList;
+function applyFilters() {
+  const searchQuery = searchInput.value.toLowerCase();
+  const selectedCategory = categorySelect.value.toLowerCase();
+
+  // Apply category and search filters
+  currentResults = products.filter((product) => {
+    const matchesCategory = selectedCategory === 'all' || product.category.toLowerCase() === selectedCategory;
+    const matchesSearch = searchQuery === '' || (
+      product.category.toLowerCase().includes(searchQuery) ||
+      product.title.toLowerCase().includes(searchQuery) ||
+      product.alt.toLowerCase().includes(searchQuery) ||
+      product.attributes.some(attr => attr.toLowerCase().includes(searchQuery))
+    );
+    return matchesCategory && matchesSearch;
+  });
+
+  displayResults(currentResults);
+}
+
+
+function handleSelectChange(e) {
+  currentResults = filterCategory(e.target.value);
+  displayResults(currentResults);
+}
+
+function handleSearchChange(e) {
+  currentResults = filterSearch(e.target.value);
+  displayResults(currentResults);
 }
