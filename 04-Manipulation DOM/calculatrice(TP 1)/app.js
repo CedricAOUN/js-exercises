@@ -19,13 +19,13 @@ function calculate(num1, num2, operator) {
       return num1 * num2;
     case '/':
       if (num2 === 0) {
-        return '⚠️ You divide by 0 and created a black hole. ⚠️';
+        return '⚠️ You divided by 0 and created a black hole. ⚠️';
       }
       return num1 / num2;
     case '%':
       return num1 % num2;
     default:
-      return 'Hey! Don\'t touch the inspector!';
+      return 'Hey! Don\'t touch the inspector! ☝️';
   }
 
 }
@@ -35,10 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const num1 = parseFloat(inputs[0].value.replace(',', '.'));
     const num2 = parseFloat(inputs[1].value.replace(',', '.'));
+
     if (isNaN(num1) || isNaN(num2)) {
-      result.textContent = 'Try again...With only numbers this time!';
+      resultDisplay.textContent = 'Try again... With only numbers this time!';
+      return;
+    }
+
+    const equation = calculate(num1, num2, operatorSelector.value);
+
+    // handle if calculate returned a string
+    if (typeof equation == 'string') {
+      result.textContent = equation;
     } else {
-      result.textContent = (`${num1} ${operatorSelector.value} ${num2} = `) + calculate(num1, num2, operatorSelector.value).toFixed(2);
+      result.textContent = (`${num1} ${operatorSelector.value} ${num2} = `) + equation.toFixed(2);
     }
     
   }
