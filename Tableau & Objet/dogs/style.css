@@ -1,0 +1,9 @@
+#savedPhotos img {
+  height: 200px;
+  width: 200px;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}

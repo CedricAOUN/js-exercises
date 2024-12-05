@@ -1,0 +1,77 @@
+body {
+  color: white;
+  background-color: black;
+  height: 100dvh;
+}
+
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 12fr;
+}
+
+i {
+  font-size: 40px;
+  margin-top: 15px;
+}
+h1 {
+  font-weight: bold;
+}
+h1, h3, #stats i, .detail-title {
+  color: rgba(48, 151, 199, 0.747);
+}
+
+.current {
+  color: rgba(61, 195, 235, 0.596) !important;
+}
+
+#discover {
+  background: url('ttps://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/star-wars-largest-starships-ranked.jpg');
+}
+
+#stats {
+  background: url('https://galacticsabers.co/wp-content/uploads/2023/07/mattgallodesigns_planets_in_space_inspired_by_star_wars_hyper_r_52d158e5-0fc1-4d86-8ecd-6d58ecbf3a69-1024x574.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.loader {
+  height: 15px;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+
+#planetList {
+  background: url('https://unblast.com/wp-content/uploads/2021/01/Space-Background-Images.jpg');
+} 
+
+
+#planetList ul {
+  overflow: scroll;
+  height: 600px;
+}
+
+
+#planetList ul li {
+  font-size: 30px;
+  padding: 5px;
+  height: 75px;
+}
+
+.small-text {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+
+.card-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#card i {
+  width: 70px;
+  font-size: 50px;
+}
