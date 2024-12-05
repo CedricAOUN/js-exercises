@@ -75,3 +75,13 @@ h1, h3, #stats i, .detail-title {
   width: 70px;
   font-size: 50px;
 }
+
+article {
+  border: 1px solid white;
+  padding: 20px;
+}
+
+article img {
+  height: 200px;
+  width: 200px;
+}

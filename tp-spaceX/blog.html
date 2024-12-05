@@ -40,38 +40,19 @@
 
     <!-- main content -->
     <div class="p-5 d-flex gap-5">
-      <div id="planetList" class="w-50 border border-2 border-white p-5">
-        <h1>PLANETES</h1>
-        <div class="d-flex flex-column gap-1 mb-1">
-          <select id="selectField" class="form-select w-50">
-            <option value="" selected>Toutes les Planetes</option>
-            <option value="100000">0 => 100 000</option>
-            <option value="100000-100000000">100.000 => 100.000.000</option>
-            <option value="100000000">100.000.000+</option>
-          </select>
-          <div class="input-group w-100">
-            <input id='searchField' type="text" class="form-control" placeholder="Nom de planet...">
-            <div class="input-group-append">
-              <button id="searchBtn" class="btn btn-primary" type="button">Recherche</button>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-between align-items-center bg-primary mb-2 border-bottom border-1">
-          <p class="px-4 m-3 fw-bold">Nom</p>
-          <p class="px-4 m-3 fw-bold">Terrain</p>
-        </div>
-        <img class="loader w-100 h-50" src="loader.svg"/>
-        <ul class="list-unstyled">
-
-        </ul>
-        <p id="planetResults"></p>
-      </div>
-      <div id="planetDetails" class="w-100 border border-2 border-white p-5">
-        <p class="text-center">Selectionner le contenu a afficher !</p>
+      <div id="blogSection" class="d-flex flex-wrap">
+        <article>
+          <h3>This is a test</h3>
+          <img src="https://picsum.photos/200/300">
+          <p>Desc</p>
+          <button>Edit</button>
+          <button>Delete</button>
+        </article>
       </div>
     </div>
   </main>
 
+  <script src="blog.js"></script>
   <script src="api.js"></script>
   <script src="dom.js"></script>
 </body>

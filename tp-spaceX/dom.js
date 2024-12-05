@@ -16,54 +16,53 @@ currentDate.setMonth(currentDate.getMonth() + 1);
 currentDate.setFullYear(currentDate.getFullYear() + 1);
 if (nextDateElement) nextDateElement.textContent = currentDate.toDateString();
 
+// GLOBAL VARIABLES
+let planets;
+let people;
+let vehicles;
 
-// API
-fetch('https://swapi.dev/api/people').then((res) => res.json())
-  .then((res) => {
-    const loader = document.querySelector('#humans .loader');
-    if (loader) loader.classList = 'd-none loader';
-    if (humanStatElement) humanStatElement.textContent = res.count;
-  });
+// For more performance, check current route before fetching info
+const currentRoute = window.location.pathname;
 
-fetch('https://swapi.dev/api/starships').then((res) => res.json())
-  .then((res) => {
-    const loader = document.querySelector('#vehicles .loader');
-    if (loader) loader.classList = 'd-none loader';
-    if (vehiclesStatElement) vehiclesStatElement.textContent = res.count;
-  });
-
-const fetchAllPlanets = async (url) => {
-  let allPlanets = [];
-  let count = 0;
-
-  async function fetchPage(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    count = data.count;
-
-    allPlanets = [...allPlanets, ...data.results];
-
-    if (data.next) {
-      await fetchPage(data.next); 
-    }
+// INIT
+async function init() {
+  if (currentRoute == '/tp-spaceX/index.html') { 
+    people = await fetchData('https://swapi.dev/api/people');
+    vehicles = await fetchData('https://swapi.dev/api/starships');
+    planets = await fetchData('https://swapi.dev/api/planets');
   }
 
-  await fetchPage(url);
+  if(currentRoute == '/tp-spaceX/planets.html') planets = await fetchAllResults('https://swapi.dev/api/planets');
 
-  return { allPlanets, count };
+  removeLoaders();
+  displayStats();
+  planetListRender(planets);
+};
+
+init();
+
+// display stats on index.html
+function displayStats() {
+  // only displayStats if on index.html
+  if (humanStatElement && vehiclesStatElement && planetStatElement) { 
+    humanStatElement.textContent = people.count;
+    vehiclesStatElement.textContent = vehicles.count;
+    planetStatElement.textContent = planets.count;
+  }
 }
 
-fetchAllPlanets('https://swapi.dev/api/planets').then((res) => {
-  const loader = document.querySelector('#planets .loader, #planetList .loader');
-  if (loader) loader.classList = 'd-none loader';
-  if (planetStatElement) planetStatElement.textContent = res.count;
-  if (planetListElement) planetListRender(res.allPlanets);
-  if (planetResultsElement) planetResultsElement.textContent = `${res.count} resultat(s)`;
-})
+// remove loaders if they exist on the page
+function removeLoaders() {
+  const loaders = document.querySelectorAll('.loader');
+  if (loaders.length > 0) {
+    for (let l of loaders) {
+      l.remove();
+    }
+  }
+}
 
-// filter planets according to the selectField
+// filter planets according to the selectField and searchField
 const filterPlanets = (allPlanets) => {
-
   const filteredPlanets = allPlanets.filter((planet) => {
     if (selectField.value) {
       switch (selectField.value) {
@@ -82,7 +81,7 @@ const filterPlanets = (allPlanets) => {
     }
   });
 
-  let searchedPlanets = filteredPlanets;
+  let searchedPlanets = filteredPlanets; // if searchField empty just return searchedPlanets
   if (searchField.value != '') {
     searchedPlanets = filteredPlanets.filter((planet) => planet.name.toLowerCase().includes(searchField.value.toLowerCase()));
     console.log(searchedPlanets);
@@ -118,7 +117,7 @@ const planetListRender = (allPlanets) => {
 
 // display detailed info on the right when a planet is clicked
 async function displayDetailedInfo(name) {
-  const planet = await fetchSinglePlanet(name);
+  const planet = planets.find((planet) => planet.name == name);
   planetDetails.innerHTML = '';
 
   const mainTitle = `<h1>${planet.name}</h1>`
@@ -150,23 +149,11 @@ function infoCard(iconClass, title, value) {
   return card;
 }
 
-// fetch a single planet by its name
-async function fetchSinglePlanet(planetName) {
-  const url = `https://swapi.dev/api/planets/?search=${planetName}`;
-  const planet = await fetch(url).then(res => res.json())
-    .then((res) => {
-      return res.results[0];
-    })
-  return planet;
-}
 
 // listeners
 selectField.addEventListener('change', handleChange);
 searchBtn.addEventListener('click', handleChange);
 
 function handleChange() {
-  console.log('change');
-  fetchAllPlanets('https://swapi.dev/api/planets').then((res) => {
-    planetListRender(res.allPlanets)
-  });
+  planetListRender(planets);
 }
